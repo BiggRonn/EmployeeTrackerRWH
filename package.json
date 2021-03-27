@@ -1,0 +1,23 @@
+{
+  "name": "employeetrackerrwh",
+  "version": "1.0.0",
+  "description": "allows users to manipulate a view an employee database",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BiggRonn/EmployeeTrackerRWH.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BiggRonn/EmployeeTrackerRWH/issues"
+  },
+  "homepage": "https://github.com/BiggRonn/EmployeeTrackerRWH#readme"
+}
