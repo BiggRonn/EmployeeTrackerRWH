@@ -78,14 +78,14 @@ function addEmployee(){
     message: "What is the employee's role?"
   },{
     type: "input",
-    name: "quantity",
-    message: "How many do you have?"
+    name: "managerID",
+    message: "Who is the employee's manager?"
   }]).then(function(response){
     console.log(response);
-    const query = "INSERT INTO products (flavor, price, quantity) VALUES (?, ?, ?);";
+    const query = "INSERT INTO employees (first_name, last_name, roleID, managerID) VALUES (?, ?, ?, ?);";
 
-    const foo = connection.query(query, [response.flavor, response.price, response.quantity], function(err, data){
-      console.log("Added flavor", response.flavor);
+    const foo = connection.query(query, [response.firstName, response.lastName, response.roleID, response.managerID], function(err, data){
+      console.log("Added employee", response.lastName);
       console.log(foo.sql);
       init();
     })
