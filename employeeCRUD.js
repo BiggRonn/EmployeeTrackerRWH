@@ -59,10 +59,19 @@ function init() {
       case "View Roles":
         viewRoles();
         break;
+        case "Update Employee Roles":
+        updateEmployeeRole();
+        break;
       default:
         connection.end();
     }
   })
+}
+
+function updateEmployeeRole(){
+  //do the update stuff here
+
+  init();
 }
 
 
