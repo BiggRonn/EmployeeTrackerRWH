@@ -24,28 +24,40 @@ connection.connect((err) => {
   init();
 });
 
-function init(){
+function init() {
   inquirer.prompt([{
     type: "list",
     name: "action",
     message: "What would you like to do?",
     choices: [
-      "Add Employees",
-      "Add Departments",
-      "Add Roles",
+      "Add Employee",
+      "Add Department",
+      "Add Role",
       "View Employees",
       "View Departments",
       "View Roles",
       "Update Employee Roles",
       "Exit"
     ]
-  }]).then(function(response){
-    switch(response.action){
-      case "Add Employees":
+  }]).then(function (response) {
+    switch (response.action) {
+      case "Add Employee":
         addEmployee();
         break;
-      case "Add Departments":
+      case "Add Department":
         addDepartment();
+        break;
+      case "Add Role":
+        addRole();
+        break;
+      case "View Employees":
+        viewEmployees();
+        break;
+      case "View Departments":
+        viewDepartments();
+        break;
+      case "View Roles":
+        viewRoles();
         break;
       default:
         connection.end();
@@ -54,14 +66,26 @@ function init(){
 }
 
 
-function viewFlavors(){
-  connection.query("SELECT * FROM products", function(err, data){
+function viewEmployees() {
+  connection.query("SELECT * FROM employees", function (err, data) {
     console.table(data);
     init();
-  })
+  });
+}
+function viewDepartments() {
+  connection.query("SELECT * FROM departments", function (err, data) {
+    console.table(data);
+    init();
+  });
+}
+function viewRoles() {
+  connection.query("SELECT * FROM roles", function (err, data) {
+    console.table(data);
+    init();
+  });
 }
 
-function addEmployee(){
+function addEmployee() {
   inquirer.prompt([{
     type: "input",
     name: "firstName",
@@ -76,18 +100,60 @@ function addEmployee(){
     type: "input",
     name: "roleID",
     message: "What is the employee's role?"
-  },{
+  }, {
     type: "input",
     name: "managerID",
     message: "Who is the employee's manager?"
-  }]).then(function(response){
+  }]).then(function (response) {
     console.log(response);
-    const query = "INSERT INTO employees (first_name, last_name, roleID, managerID) VALUES (?, ?, ?, ?);";
+    const query = "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
 
-    const foo = connection.query(query, [response.firstName, response.lastName, response.roleID, response.managerID], function(err, data){
+    const foo = connection.query(query, [response.firstName, response.lastName, response.roleID, response.managerID], function (err, data) {
       console.log("Added employee", response.lastName);
       console.log(foo.sql);
       init();
     })
   })
 }
+function addRole() {
+  inquirer.prompt([{
+    type: "input",
+    name: "title",
+    message: "What is the title of the role?"
+  }
+  {
+    type: "input",
+    name: "salary",
+    message: "What is the salary?"
+  }, {
+    type: "input",
+    name: "departmentID",
+    message: "What is the departmentID?"
+  }]).then(function (response) {
+    console.log(response);
+    const query = "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?);";
+
+    const foo = connection.query(query, [response.title, response.salary, response.departmentID], function (err, data) {
+      console.log("Added role", response.title);
+      console.log(foo.sql);
+      init();
+    })
+  })
+}
+
+function addDepartment() {
+  inquirer.prompt([{
+    type: "input",
+    name: "name",
+    message: "What is the name of the department?"
+  }]).then(function (response)){
+    const query = "INSERT INTO department (name) VALUES (?);";
+    const foo = connection.query(query, [response.name]);
+    console.log("Added department", response.name);
+    init();
+  }
+
+
+}
+
+

@@ -26,8 +26,11 @@ CREATE TABLE department(
 
 );
 
-INSERT INTO employees (firstName, lastName, roleID, managerID);
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
+VALUES (Timothy, Aolee, 3, 13);
 
-INSERT INTO roles(roleID, title, salary, department_id);
+INSERT INTO roles(role_id, title, salary, department_id)
+VALUES (3, "Manager", 150,000, 1);
 
-INSERT INTO department(id, name);
+INSERT INTO department(name)
+VALUES(1, "Administration");
