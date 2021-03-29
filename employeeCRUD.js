@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 
   // Be sure to update with your own MySQL password!
   password: 'root',
-  database: 'employee_db',
+  database: 'company_db',
 });
 
 
@@ -43,25 +43,25 @@ function init() {
   }]).then(function (response) {
     switch (response.action) {
       case "Add Employee":
-        addEmployee();
+        util.addEmployee();
         break;
       case "Add Department":
-        addDepartment();
+        util.addDepartment();
         break;
       case "Add Role":
-        addRole();
+        util.addRole();
         break;
       case "View Employees":
-        viewEmployees();
+        util.viewEmployees();
         break;
       case "View Departments":
-        viewDepartments();
+        util.viewDepartments();
         break;
       case "View Roles":
-        viewRoles();
+        util.viewRoles();
         break;
         case "Update Employee Roles":
-        updateEmployeeRole();
+        util.updateEmployeeRole();
         break;
       default:
         connection.end();
