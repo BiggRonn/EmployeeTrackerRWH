@@ -69,9 +69,23 @@ function init() {
 }
 
 function updateEmployeeRole(){
-  //do the update stuff here
+  inquirer.prompt([{
+    type: "input",
+    name: "empID",
+    message: "What is the employee's ID?"
+  },
+  {
+    type: "input",
+    name: "newRole",
+    message: "What role would you like this employee to have?"
+  }]).then(function(response){
+    const query = "UPDATE employees SET role_id = (?) WHERE id = (?)";
 
-  init();
+    connection.query(query, [response.newRole, response.empID]);
+
+    init();
+  })
+
 }
 
 
@@ -104,7 +118,7 @@ function addEmployee() {
     type: "input",
     name: "lastName",
     message: "What is the employee's last name?"
-  }
+  },
   {
     type: "input",
     name: "roleID",
