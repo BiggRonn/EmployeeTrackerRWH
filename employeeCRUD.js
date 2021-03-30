@@ -1,29 +1,9 @@
 const mysql = require('mysql');
 const inquirer = require("inquirer");
-//const util = require("./lib/utils");
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-
-  // Your port, if not 3306
-  port: 3306,
-
-  // Your username
-  user: 'root',
-
-  // Be sure to update with your own MySQL password!
-  password: 'root',
-  database: 'company_db',
-});
+const dbFunctions = require("./lib/utils");
+const connection = require("./lib/connection")
 
 
-
-connection.connect((err) => {
-  if (err) throw err;
-  console.log(`connected as id ${connection.threadId}`);
-
-  init();
-});
 
 
 function init() {
@@ -69,3 +49,5 @@ function init() {
     }
   })
 }
+
+init();
