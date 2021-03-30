@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const inquirer = require("inquirer");
-const dbFunctions = require("./lib/utils");
+const myUtils = require("./lib/utils");
 const connection = require("./lib/connection")
 
 
@@ -24,7 +24,7 @@ function init() {
   }]).then(function (response) {
     switch (response.action) {
       case "Add Employee":
-        addEmployee();
+        myUtils.addEmployee();
         break;
       case "Add Department":
         addDepartment();
