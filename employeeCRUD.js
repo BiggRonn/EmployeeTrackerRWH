@@ -25,6 +25,47 @@ connection.connect((err) => {
   init();
 });
 
+//questions for the addRole.. will fill choices with sql query
+const rQuestions = [{
+  type: "input",
+  name: "title",
+  message: "What is the title of the role?"
+},
+{
+  type: "input",
+  name: "salary",
+  message: "What is the salary?"
+}, {
+  type: "list",
+  name: "department",
+  message: "What is the department?",
+  choices: [],
+}]
+
+//questions for addEmployee prompt... choices arrays to be filled with sql query
+const eQuestions = [{
+  type: "input",
+  name: "firstName",
+  message: "What is the employee's first name?"
+},
+{
+  type: "input",
+  name: "lastName",
+  message: "What is the employee's last name?"
+},
+{
+  type: "list",
+  name: "roleID",
+  message: "What is the employee's role?",
+  choices: []
+}, {
+  type: "input",
+  name: "managerID",
+  message: "Who is the employee's manager?",
+  choices: []
+}]
+
+
 function init() {
   inquirer.prompt([{
     type: "list",
@@ -111,25 +152,14 @@ function viewRoles() {
 }
 
 function addEmployee() {
-  inquirer.prompt([{
-    type: "input",
-    name: "firstName",
-    message: "What is the employee's first name?"
-  },
-  {
-    type: "input",
-    name: "lastName",
-    message: "What is the employee's last name?"
-  },
-  {
-    type: "input",
-    name: "roleID",
-    message: "What is the employee's role?"
-  }, {
-    type: "input",
-    name: "managerID",
-    message: "Who is the employee's manager?"
-  }]).then(function (response) {
+  const roleList = connection.query("SELECT * FROM roles");
+  //need to select from managers in employees only....
+  const managerList = connection.query("SELECT * FROM roles"); 
+  eQuestions[2].choices = roleList;
+  eQuestions[3].choices = ;
+
+
+  inquirer.prompt(eQuestions).then(function (response) {
     console.log(response);
     const query = "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);";
 
@@ -142,20 +172,11 @@ function addEmployee() {
 }
 
 function addRole() {
-  inquirer.prompt([{
-    type: "input",
-    name: "title",
-    message: "What is the title of the role?"
-  },
-  {
-    type: "input",
-    name: "salary",
-    message: "What is the salary?"
-  }, {
-    type: "input",
-    name: "departmentID",
-    message: "What is the departmentID?"
-  }]).then(function (response) {
+  const departmentList = connection.query("SELECT * FROM departments");
+  rQuestions[2].choices = departmentList;
+
+  inquirer.prompt(rQuestions)
+  .then(function (response) {
     console.log(response);
     const query = "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?);";
 
@@ -166,6 +187,7 @@ function addRole() {
     })
   })
 }
+
 
 function addDepartment() {
   inquirer.prompt([{
