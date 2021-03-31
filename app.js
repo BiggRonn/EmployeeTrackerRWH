@@ -155,7 +155,7 @@ function viewEmployees() {
   });
 }
 function viewDepartments() {
-  connection.query("SELECT * FROM departments", function (err, data) {
+  connection.query("SELECT * FROM department", function (err, data) {
       console.table(data);
       init();
   });
