@@ -192,15 +192,15 @@ async function addEmployee() {
 
 async function addRole() {
   const departmentList = await connection.query("SELECT department.name FROM department;");
-  rQuestions[2].choices = departmentList.map(x=> x.name);
+  rQuestions[2].choices = departmentList.map(x=> ({name: x.name, value: x.id}));
 
-  inquirer.prompt(rQuestions)
+  await inquirer.prompt(rQuestions)
       .then(function (response) {
           console.log(response);
           const query = "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?);";
 
-          const dID = connection.query("SELECT name FROM department WHERE id = ?;", response.departmentID);
-          console.log(dID);
+          // const dID = connection.query("SELECT department.id FROM department WHERE name = (?);", response.departmentID)
+          // .then(console.log(dID));
 
           const foo = connection.query(query, [response.title, response.salary, response.departmentID], function (err, data) {
               console.log("Added role", response.title);
