@@ -199,6 +199,9 @@ async function addRole() {
           console.log(response);
           const query = "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?);";
 
+          const dID = connection.query("SELECT name FROM department WHERE id = ?;", response.departmentID);
+          console.log(dID);
+
           const foo = connection.query(query, [response.title, response.salary, response.departmentID], function (err, data) {
               console.log("Added role", response.title);
               
