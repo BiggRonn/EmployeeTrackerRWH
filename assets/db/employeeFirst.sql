@@ -1,4 +1,7 @@
+DROP IF EXISTS company_db;
 CREATE DATABASE company_db;
+
+USE company_db;
 
 CREATE TABLE employees(
     id INT NOT NULL AUTO_INCREMENT,
@@ -30,10 +33,10 @@ CREATE TABLE department(
 );
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES (Timothy, Aolee, 3, 13),(BOBB, werd, 3, 3),(David, wre, 3, 1),(Greg, Azxcv, 2, 1),(Paul, gdsage, 2, 1);
+VALUES ("Timothy", "Aolee", 1, null),("Bob","Werd", 3, 1),("Ahmed", "Perry", 3, 1),("Greg", "Azerces", 2, 2),("Paul", "Dinsage", 2, 2);
 
 INSERT INTO roles(title, salary, department_id)
-VALUES (3, "Manager", 150000, 1),(3, "Engineer", 50000, 1),(3, "Lawyer", 250000, 1);
+VALUES ("CEO", 2550000, 1),("Engineer", 100000, 2),("Lawyer", 250000, 3),("Sales Lead", 50000, 4);
 
 INSERT INTO department(name)
 VALUES("Administration"),("Technical"),("Legal"),("Sales");
