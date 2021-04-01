@@ -112,7 +112,7 @@ const eQuestions = [{
   message: "What is the employee's role?",
   choices: []
 }, {
-  type: "input",
+  type: "list",
   name: "managerID",
   message: "Who is the employee's manager?",
   choices: []
