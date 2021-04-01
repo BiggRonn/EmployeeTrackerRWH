@@ -182,7 +182,7 @@ async function addEmployee() {
 
 
   const mList = await connection.query("SELECT * FROM employees;");
-  console.log(mList);
+  
 
   eQuestions[2].choices = await roleList.map((x) => ({ name: x.title, value: x.id }));
 
