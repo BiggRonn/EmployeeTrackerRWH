@@ -95,7 +95,7 @@ const rQuestions = [{
   choices: []
 }]
 
-questions for addEmployee prompt... choices arrays to be filled with sql query
+
 const eQuestions = [{
   type: "input",
   name: "firstName",
@@ -121,7 +121,7 @@ const eQuestions = [{
 const updateQ = [{
   type: "list",
   name: "empID",
-  message: "What is the employee's ID?",
+  message: "Which employee would you like to update?",
   choices: []
 },
 {
@@ -135,19 +135,14 @@ const updateQ = [{
 
 //get this to work with employee name.
 async function updateEmployeeRole() {
+  const eList = await connection.query("SELECT * FROM employees;");
+  updateQ[0].choices = await eList.map((x) => ({ name: x.first_name, value: x.id }));
 
-  await inquirer.prompt([{
-    type: "list",
-    name: "empID",
-    message: "What is the employee's ID?",
-    choices: []
-  },
-  {
-    type: "list",
-    name: "newRole",
-    message: "What role would you like this employee to have?",
-    choices: []
-  }]).then(function (response) {
+  const roleList = await connection.query("SELECT * FROM roles;");
+  updateQ[1].choices = await roleList.map((x) => ({ name: x.title, value: x.id }));
+
+
+  await inquirer.prompt(updateQ).then(function (response) {
     const query = "UPDATE employees SET role_id = (?) WHERE id = (?)";
 
     connection.query(query, [response.newRole, response.empID]);
