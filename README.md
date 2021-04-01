@@ -3,9 +3,9 @@
 
 ## Description
 
-This application will allow users to view and add information in a company database.
+This application will allow users to view and add information in a company database. App uses a database to store information and will create read and update data based on user inputs. 
 
-![myTeam Preview](assets\NoteExample.PNG "A preview of Note Taker")
+
 
 
 
